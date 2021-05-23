@@ -35,6 +35,7 @@ const routes = [
     {
         path: '/collections/:collection_id',
         name: 'learn-collection',
+        props: true,
         component: SingleCardWindow
     },
 

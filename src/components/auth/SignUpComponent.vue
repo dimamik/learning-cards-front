@@ -1,30 +1,30 @@
 <template>
-  <v-card dark class="form-card">
+  <v-card class="form-card" dark>
     <v-card-title>Sign up</v-card-title>
     <v-form @submit="signUp">
       <v-text-field
-          type="text"
-          label="username"
-          outlined
           v-model="username"
           :rules="AuthService.usernameRules"
+          label="username"
+          outlined
+          type="text"
       ></v-text-field>
       <v-text-field
-          type="email"
-          label="email"
-          outlined
           v-model="email"
           :rules="AuthService.emailRules"
+          label="email"
+          outlined
+          type="email"
       ></v-text-field>
       <v-text-field
-          type="password"
-          label="password"
-          outlined
           v-model="password"
           :rules="AuthService.passwordRules"
+          label="password"
+          outlined
+          type="password"
       ></v-text-field>
       <v-card-actions>
-        <v-btn type="submit" depressed color="primary">Sign up</v-btn>
+        <v-btn color="primary" depressed type="submit">Sign up</v-btn>
       </v-card-actions>
     </v-form>
     <v-alert

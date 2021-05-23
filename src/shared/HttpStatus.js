@@ -1,4 +1,4 @@
 export default {
-  OK: 200,
-  NO_CONTENT: 204
+    OK: 200,
+    NO_CONTENT: 204
 }

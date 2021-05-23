@@ -1,23 +1,23 @@
 <template>
-  <v-card dark class="form-card">
+  <v-card class="form-card" dark>
     <v-card-title>Sign in</v-card-title>
     <v-form @submit="signIn">
       <v-text-field
-          type="email"
-          label="email"
-          outlined
           v-model="email"
           :rules="AuthService.emailRules"
+          label="email"
+          outlined
+          type="email"
       ></v-text-field>
       <v-text-field
-          type="password"
-          label="password"
-          outlined
           v-model="password"
           :rules="AuthService.passwordRules"
+          label="password"
+          outlined
+          type="password"
       ></v-text-field>
       <v-card-actions>
-        <v-btn type="submit" depressed color="primary">Sign in</v-btn>
+        <v-btn color="primary" depressed type="submit">Sign in</v-btn>
       </v-card-actions>
     </v-form>
     <v-alert
@@ -47,15 +47,15 @@ export default {
     signIn(e) {
       e.preventDefault();
       AuthService.signIn(this.email, this.password)
-        .then(() => router.push("my-cards"))
-        .catch(e => this.error = e.response.data.message);
+          .then(() => router.push("my-cards"))
+          .catch(e => this.error = e.response.data.message);
     }
   }
 }
 </script>
 
 <style scoped>
-  .form-card {
-    padding: 1em;
-  }
+.form-card {
+  padding: 1em;
+}
 </style>

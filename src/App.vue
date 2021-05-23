@@ -12,7 +12,6 @@
 <script>
 
 import NavigationBar from "@/components/NavigationBar";
-import CollectionsService from "@/services/CollectionsService";
 
 export default {
   name: 'App',

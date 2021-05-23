@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center" class="header">
+    <v-row class="header" justify="center">
       <h2>Sign in or sign up</h2>
     </v-row>
     <v-row justify="space-around">
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-  .header {
-    margin: 2em 0;
-  }
+.header {
+  margin: 2em 0;
+}
 </style>

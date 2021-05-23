@@ -21,7 +21,7 @@
             v-for="item in items"
             :key="item.title"
             link
-            v-bind:to="item.route"
+            v-bind:to="{path: '/' + item.route}"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -32,7 +32,7 @@
           </v-list-item-content>
         </v-list-item>
 
-<!--        Auth Button-->
+        <!--        Auth Button-->
         <v-list-item
             v-if="AuthService.current"
             link
@@ -47,9 +47,9 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item
-            v-else link
+            v-else key="Sign out"
+            link
             to="auth"
-            key="Sign out"
         >
           <v-list-item-icon>
             <v-icon>mdi-login</v-icon>
@@ -84,9 +84,10 @@ export default {
     AuthService,
     drawer: null,
     items: [
-      {title: 'Home', icon: 'mdi-home-search', route: 'home'},
+      {title: 'All Collections', icon: 'mdi-library', route: 'collections'},
       {title: 'My Collections', icon: 'mdi-cards', route: 'my-collections'},
-      {title: 'Learn Collection', icon: 'mdi-school', route: 'learn-collection'},
+      {title: 'Liked Collections', icon: 'mdi-thumb-up', route: 'liked-collections'},
+      // {title: 'Learn Collection', icon: 'mdi-school', route: 'learn-collection'},
       {title: 'Profile', icon: 'mdi-account', route: 'profile'}
     ],
     right: null
