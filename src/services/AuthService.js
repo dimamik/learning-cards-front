@@ -39,6 +39,10 @@ export default {
             .catch(e => console.log(e))
     },
 
+    authenticated() {
+        return this.current != null
+    },
+
     usernameRules: [
         v => usernameRegex.test(v) || 'Username has wrong format'
     ],

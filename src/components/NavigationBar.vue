@@ -18,7 +18,7 @@
           nav
       >
         <v-list-item
-            v-for="item in items"
+            v-for="item in items.filter(i => !i.auth || AuthService.current)"
             :key="item.title"
             link
             v-bind:to="{path: '/' + item.route}"
@@ -31,42 +31,33 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-        <!--        Auth Button-->
-        <v-list-item
-            v-if="AuthService.current"
-            link
-            @click="signOut"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Sign out</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-            v-else key="Sign out"
-            link
-            to="auth"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-login</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Authenticate</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
       <v-toolbar-title>Learning Cards</v-toolbar-title>
+
+      <div class="auth-btn-container">
+        <v-menu v-if="AuthService.current" rounded="rounded" offset-y>
+          <template v-slot:activator="{ attrs, on }">
+            <v-btn color="secondary" v-bind="attrs" v-on="on">{{ AuthService.current.userName }}
+              <v-icon>mdi-account</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item link @click="signOut">
+              <v-icon>mdi-logout</v-icon>
+              <v-list-item-title>Sign out</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <div v-else>
+          <v-btn color="primary" to="sign-in">Sign in</v-btn>
+          <v-btn outlined color="secondary" to="sign-up" class="sign-up-btn">Sign up</v-btn>
+        </div>
+      </div>
     </v-app-bar>
 
   </div>
@@ -82,13 +73,13 @@ export default {
   name: "NavigationBar",
   data: () => ({
     AuthService,
+    current: AuthService.current,
     drawer: null,
     items: [
-      {title: 'All Collections', icon: 'mdi-library', route: 'collections'},
-      {title: 'My Collections', icon: 'mdi-cards', route: 'my-collections'},
-      {title: 'Liked Collections', icon: 'mdi-thumb-up', route: 'liked-collections'},
-      // {title: 'Learn Collection', icon: 'mdi-school', route: 'learn-collection'},
-      {title: 'Profile', icon: 'mdi-account', route: 'profile'}
+      {title: 'All Collections', icon: 'mdi-library', route: 'collections', auth: false},
+      {title: 'My Collections', icon: 'mdi-cards', route: 'my-collections', auth: true},
+      {title: 'Liked Collections', icon: 'mdi-thumb-up', route: 'liked-collections', auth: true},
+      // {title: 'Learn Collection', icon: 'mdi-school', route: 'learn-collection'}
     ],
     right: null
   }),
@@ -96,8 +87,8 @@ export default {
     signOut() {
       AuthService.signOut()
           .then(() => {
-            if (router.currentRoute.name !== 'home') {
-              router.push("home")
+            if (router.currentRoute.name !== 'collections') {
+              router.push("/collections")
             }
           });
     }
@@ -106,5 +97,11 @@ export default {
 </script>
 
 <style scoped>
+  .auth-btn-container {
+    margin-left: auto
+  }
 
+  .sign-up-btn {
+    margin-left: 1em;
+  }
 </style>
