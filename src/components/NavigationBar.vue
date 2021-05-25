@@ -36,7 +36,6 @@
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Learning Cards</v-toolbar-title>
 
       <div class="auth-btn-container">
         <v-menu v-if="AuthService.current" rounded="rounded" offset-y>

@@ -2,7 +2,7 @@
   <v-container class="main">
     <v-row justify="center">
       <v-col md="5">
-        <v-card class="form-card" dark>
+        <v-card class="form-card">
           <v-card-title>Sign up</v-card-title>
           <v-form ref="form" @submit="signUp">
             <v-text-field
