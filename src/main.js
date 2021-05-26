@@ -20,6 +20,6 @@ AuthService.loadCurrent()
             render: h => h(App)
         }).$mount('#app')
     ).catch(err => {
-        document.write("Unexpected connection error!");
-        console.log(err);
-    });
+    document.write("Unexpected connection error!");
+    console.log(err);
+});

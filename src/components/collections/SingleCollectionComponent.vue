@@ -131,21 +131,22 @@ export default {
     learn_clicked: function (event) {
       // `this` inside methods points to the Vue instance
       router.push({path: "/collections/" + this.collection.collectionID});
-
     },
     add_to_liked: function (event) {
       CollectionsService.addCollectionToUserFavourites(this.collection.collectionID);
       this.liked = true;
-
     },
     delete_from_liked: function (event) {
       CollectionsService.deleteCollectionFromUserFavourites(this.collection.collectionID);
       this.liked = false;
-
+      if (this.are_liked_collections) {
+        this.is_visible = false;
+      }
     },
     delete_collection: function (event) {
       CollectionsService.deleteCollection(this.collection.collectionID);
       this.is_visible = false;
+      location.reload()
     }
   },
   data() {
