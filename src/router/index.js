@@ -73,7 +73,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
             next("collections")
         }
-    }
+    },
 ]
 
 const router = new VueRouter({

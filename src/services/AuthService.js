@@ -8,13 +8,12 @@ export default {
     current: null,
 
     loadCurrent() {
-        axios.get("auth/current-user", {withCredentials: true})
+        return axios.get("auth/current-user", {withCredentials: true})
             .then(r => {
                 if (r.status === HttpStatus.OK) {
                     this.current = r.data
                 }
             })
-            .catch(e => console.log(e));
     },
 
     signIn(email, password) {

@@ -12,10 +12,14 @@ axios.defaults.headers["Content-Type"] = "application/json";
 //axios.defaults.headers["Access-Control-Allow-Origin"] = '*';
 axios.defaults.withCredentials = true
 
-AuthService.loadCurrent();
-
-new Vue({
-    router,
-    vuetify,
-    render: h => h(App)
-}).$mount('#app')
+AuthService.loadCurrent()
+    .then(() =>
+        new Vue({
+            router,
+            vuetify,
+            render: h => h(App)
+        }).$mount('#app')
+    ).catch(err => {
+        document.write("Unexpected connection error!");
+        console.log(err);
+    });
