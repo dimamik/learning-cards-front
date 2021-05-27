@@ -1,7 +1,7 @@
 <template>
   <v-carousel-item
       style="align-content: center; text-align: center; justify-content: center;
-    padding-top: 80px;"
+    padding-top: 8vh;"
   >
     <!--    {{ card }}-->
     <v-row

@@ -4,22 +4,22 @@
       <v-col md="5">
         <v-card class="form-card">
           <v-card-title>Sign in</v-card-title>
-          <v-form ref="form" @submit="signIn" class="form">
+          <v-form ref="form" class="form" @submit="signIn">
             <v-text-field
                 v-model="email"
                 :rules="AuthService.emailRules"
+                class="form-field"
                 label="email"
                 outlined
                 type="email"
-                class="form-field"
             ></v-text-field>
             <v-text-field
                 v-model="password"
                 :rules="AuthService.passwordRules"
+                class="form-field"
                 label="password"
                 outlined
                 type="password"
-                class="form-field"
             ></v-text-field>
             <v-card-actions>
               <v-btn color="primary" depressed type="submit">Sign in</v-btn>
@@ -34,9 +34,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row justify="center" align="center" class="sign-up-container">
+    <v-row align="center" class="sign-up-container" justify="center">
       <p class="sign-up-msg">Don't have an account yet?</p>
-      <v-btn outlined color="primary" depressed type="submit" to="sign-up">Sign up</v-btn>
+      <v-btn color="primary" depressed outlined to="sign-up" type="submit">Sign up</v-btn>
     </v-row>
   </v-container>
 </template>
@@ -59,7 +59,7 @@ export default {
     signIn(e) {
       e.preventDefault();
       if (!this.$refs.form.validate()) {
-          return;
+        return;
       }
 
       AuthService.signIn(this.email, this.password)

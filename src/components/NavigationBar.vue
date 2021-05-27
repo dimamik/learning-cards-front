@@ -38,9 +38,9 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <div class="auth-btn-container">
-        <v-menu v-if="AuthService.current" rounded="rounded" offset-y>
+        <v-menu v-if="AuthService.current" offset-y rounded="rounded">
           <template v-slot:activator="{ attrs, on }">
-            <v-btn color="secondary" v-bind="attrs" v-on="on">{{ AuthService.current.userName }}
+            <v-btn v-bind="attrs" v-on="on" color="secondary">{{ AuthService.current.userName }}
               <v-icon>mdi-account</v-icon>
             </v-btn>
           </template>
@@ -54,7 +54,7 @@
 
         <div v-else>
           <v-btn color="primary" to="sign-in">Sign in</v-btn>
-          <v-btn outlined color="secondary" to="sign-up" class="sign-up-btn">Sign up</v-btn>
+          <v-btn class="sign-up-btn" color="secondary" outlined to="sign-up">Sign up</v-btn>
         </div>
       </div>
     </v-app-bar>
@@ -96,11 +96,11 @@ export default {
 </script>
 
 <style scoped>
-  .auth-btn-container {
-    margin-left: auto
-  }
+.auth-btn-container {
+  margin-left: auto
+}
 
-  .sign-up-btn {
-    margin-left: 1em;
-  }
+.sign-up-btn {
+  margin-left: 1em;
+}
 </style>

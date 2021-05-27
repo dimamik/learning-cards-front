@@ -8,26 +8,26 @@
             <v-text-field
                 v-model="username"
                 :rules="AuthService.usernameRules"
+                class="form-field"
                 label="username"
                 outlined
                 type="text"
-                class="form-field"
             ></v-text-field>
             <v-text-field
                 v-model="email"
                 :rules="AuthService.emailRules"
+                class="form-field"
                 label="email"
                 outlined
                 type="email"
-                class="form-field"
             ></v-text-field>
             <v-text-field
                 v-model="password"
                 :rules="AuthService.passwordRules"
+                class="form-field"
                 label="password"
                 outlined
                 type="password"
-                class="form-field"
             ></v-text-field>
             <v-card-actions>
               <v-btn color="primary" depressed type="submit">Sign up</v-btn>
@@ -42,9 +42,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row justify="center" align="center" class="sign-up-container">
+    <v-row align="center" class="sign-up-container" justify="center">
       <p class="sign-up-msg">Already have an account?</p>
-      <v-btn outlined color="primary" depressed type="submit" to="sign-in">Sign in</v-btn>
+      <v-btn color="primary" depressed outlined to="sign-in" type="submit">Sign in</v-btn>
     </v-row>
   </v-container>
 </template>
