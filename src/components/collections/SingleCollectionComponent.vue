@@ -47,6 +47,7 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                  v-if="!are_my_collections"
                   v-bind="attrs"
                   v-on="on"
                   class="mx-2"

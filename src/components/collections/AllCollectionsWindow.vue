@@ -6,11 +6,10 @@
             v-bind:are_liked_collections="false"
             v-bind:are_my_collections="false"
             v-bind:collection="collection"
-
         ></SingleCollectionComponent>
       </v-col>
     </v-row>
-
+    <SimplePagination :page="page" :total="total" @prev="prev" @next="next"></SimplePagination>
   </div>
 </template>
 
@@ -18,25 +17,49 @@
 import CollectionsService from "@/services/CollectionsService";
 import NavigationBar from "@/components/NavigationBar";
 import SingleCollectionComponent from "@/components/collections/SingleCollectionComponent";
+import SimplePagination from "./SimplePagination";
 
 export default {
   name: "AllCollectionsWindow",
 
   data: () => ({
-    data: "",
+    data: [],
+    page: 1,
+    total: 1,
     liked: ""
   }),
   components: {
+    SimplePagination,
     NavigationBar,
     SingleCollectionComponent
   },
   mounted() {
-
-    CollectionsService.getAllCollections().then(
+    CollectionsService.getAllCollections(this.page).then(
         (data) => {
-          this.data = data;
+          this.data = data.items;
+          this.total = data.total
         }
     )
+  },
+  methods: {
+    prev() {
+      CollectionsService.getAllCollections(this.page - 1).then(
+          (data) => {
+            this.page--;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
+    },
+    next() {
+      CollectionsService.getAllCollections(this.page + 1).then(
+          (data) => {
+            this.page++;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
+    }
   }
 }
 </script>

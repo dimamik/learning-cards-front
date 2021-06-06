@@ -4,8 +4,8 @@ import AuthService from "@/services/AuthService";
 
 
 export default {
-    getAllCollections() {
-        return axios.get("collections")
+    getAllCollections(page) {
+        return axios.get("collections", { params: { page, size: 10 } })
             .then(r => {
                 if (r.status === HttpStatus.OK) {
                     return r.data;
@@ -14,8 +14,8 @@ export default {
             .catch(e => console.log(e));
     },
 
-    getCollectionsByUser(userId) {
-        return axios.get("collections/user/" + userId)
+    getCollectionsByUser(userId, page) {
+        return axios.get("collections/user/" + userId, { params: { page, size: 10 } })
             .then(r => {
                 if (r.status === HttpStatus.OK) {
                     return r.data;
@@ -34,9 +34,8 @@ export default {
             .catch(e => console.log(e));
     },
 
-    getCurrentUserCollections() {
-        // WARNING IS BROKEN IF NOT LOGGED IN
-        return this.getCollectionsByUser(AuthService.current.userID)
+    getCurrentUserCollections(page) {
+        return this.getCollectionsByUser(AuthService.current.userID, page)
     },
 
     addCollection(collectionDescription, collectionName) {
@@ -61,9 +60,9 @@ export default {
         }).catch(e => console.log(e));
     },
 
-    getCurrentUserFavourites() {
+    getCurrentUserFavourites(page) {
         // WARNING IS BROKEN IF NOT LOGGED IN
-        return axios.get("current-user/favorite")
+        return axios.get("current-user/favorite", { params: { page, size: 10 } })
             .then(r => {
                 if (r.status === HttpStatus.OK) {
                     return r.data;

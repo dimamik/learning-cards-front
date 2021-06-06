@@ -63,22 +63,24 @@
         <SingleCollectionComponent class=""
                                    v-bind:are_my_collections="true"
                                    v-bind:collection="collection"
-
         ></SingleCollectionComponent>
       </v-col>
     </v-row>
-
+    <SimplePagination :page="page" :total="total" @prev="prev" @next="next"></SimplePagination>
   </div>
 </template>
 
 <script>
 import CollectionsService from "@/services/CollectionsService";
 import SingleCollectionComponent from "@/components/collections/SingleCollectionComponent";
+import SimplePagination from "./SimplePagination";
 
 export default {
   name: "MyCollectionsWindow",
   data: () => ({
     data: [],
+    page: 1,
+    total: 1,
     new_collection: {
       name: "",
       description: ""
@@ -101,18 +103,37 @@ export default {
       } else {
         this.loading = false;
       }
+    },
+    prev() {
+      CollectionsService.getCurrentUserCollections(this.page - 1).then(
+          (data) => {
+            this.page--;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
+    },
+    next() {
+      CollectionsService.getCurrentUserCollections(this.page + 1).then(
+          (data) => {
+            this.page++;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
     }
   },
   components: {
+    SimplePagination,
     SingleCollectionComponent
 
-  }
-  ,
+  },
   mounted() {
-    CollectionsService.getCurrentUserCollections()
+    CollectionsService.getCurrentUserCollections(this.page)
         .then(
             (data) => {
-              this.data = data;
+              this.data = data.items;
+              this.total = data.total
             }
         )
   }

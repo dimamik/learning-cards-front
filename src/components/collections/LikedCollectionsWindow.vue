@@ -10,31 +10,55 @@
         ></SingleCollectionComponent>
       </v-col>
     </v-row>
-
+    <SimplePagination :page="page" :total="total" @prev="prev" @next="next"></SimplePagination>
   </div>
 </template>
 
 <script>
 import SingleCollectionComponent from "@/components/collections/SingleCollectionComponent";
 import CollectionsService from "@/services/CollectionsService";
+import SimplePagination from "./SimplePagination";
 
 export default {
   name: "LikedCollectionsWindow",
-  data: () => ({
-    data: []
-  }),
   components: {
+    SimplePagination,
     SingleCollectionComponent
 
   },
-
+  data: () => ({
+    data: [],
+    page: 1,
+    total: 1,
+  }),
   mounted() {
-    CollectionsService.getCurrentUserFavourites()
+    CollectionsService.getCurrentUserFavourites(this.page)
         .then(
             (data) => {
-              this.data = data;
+              this.data = data.items;
+              this.total = data.total;
             }
         )
+  },
+  methods: {
+    prev() {
+      CollectionsService.getCurrentUserFavourites(this.page - 1).then(
+          (data) => {
+            this.page--;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
+    },
+    next() {
+      CollectionsService.getCurrentUserFavourites(this.page + 1).then(
+          (data) => {
+            this.page++;
+            this.data = data.items;
+            this.total = data.total
+          }
+      )
+    }
   }
 }
 </script>
